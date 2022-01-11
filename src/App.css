@@ -2,3 +2,16 @@ body {
   background: #141414;
   color: #fff;
 }
+
+.movie-app > .row{
+  overflow: auto;
+  flex-wrap: nowrap;
+}
+
+.mvlist{
+  flex-shrink: unset;
+}
+
+.toper{
+  display: flex;
+}

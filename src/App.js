@@ -1,45 +1,39 @@
-import { useState } from 'react';
-import "bootstrap/dist/css/bootstrap.min.css";
+import { useState, useEffect } from 'react';
+import "bootstrap/dist/css/bootstrap.min.css"; 
 
 import React from 'react';
 import './App.css';
 import MovieList from './components/MovieList';
+import MovieHeading from './components/MovieHeading';
+import SearchBox from './components/SearchBox';
 
 const App = () => {
-  const [movies, setMovies] = useState([
-    {
-      "Title": "Star Wars: Empire at War",
-      "Year": "2006",
-      "imdbID": "tt0804909",
-      "Type": "game",
-      "Poster": "https://m.media-amazon.com/images/M/MV5BOGRiMDllMDUtOWFkZS00MGIyLWFkOTQtZjY2ZGUyNzY5YWRiXkEyXkFqcGdeQXVyMzM4MjM0Nzg@._V1_SX300.jpg"
-  },
-  {
-      "Title": "Star Wars Empire at War: Forces of Corruption",
-      "Year": "2006",
-      "imdbID": "tt0879261",
-      "Type": "game",
-      "Poster": "https://m.media-amazon.com/images/M/MV5BNGIxYTZiMmQtYjYzMS00ZmExLTljZDktMjE1ODY5OTJlYjlmXkEyXkFqcGdeQXVyMzM4MjM0Nzg@._V1_SX300.jpg"
-  },
-  {
-      "Title": "Star Trek: Enterprise - In a Time of War",
-      "Year": "2014",
-      "imdbID": "tt3445408",
-      "Type": "movie",
-      "Poster": "https://m.media-amazon.com/images/M/MV5BMTk4NDA4MzUwM15BMl5BanBnXkFtZTgwMTg3NjY5MDE@._V1_SX300.jpg"
-  },
-  {
-      "Title": "Star Trek: Starfleet Command: Volume II: Empires at War",
-      "Year": "2000",
-      "imdbID": "tt0272306",
-      "Type": "game",
-      "Poster": "https://m.media-amazon.com/images/M/MV5BOTJiYjQxZDQtOWM5NS00ZDZhLWJkYTUtNjQ3ZjdiMzM1MDYyXkEyXkFqcGdeQXVyMzMxNDQ0NQ@@._V1_SX300.jpg"
-  }
-  ]);
+  const [movies, setMovies] = useState([]);
+  const [searchValue, setSearchValue] = useState("s");
+
+  const getMovieRequest = async () => {
+    const url = `http://www.omdbapi.com/?apikey=23038236&s=star war`
+
+    const response = await fetch(url);
+    const responseJson = await response.json();
+
+    console.log(responseJson);
+    setMovies(responseJson.Search);
+  };
+
+  useEffect(() => {
+    getMovieRequest();
+
+  }, [])
   return ( 
-    <div className='App'>
-        <h1>Movie App</h1>
-        <MovieList  movies={movies}/>
+    <div className='container-fluid movie-app'>
+    <div className=' d-flex align-items-center mt-4 mb-4'>
+      <MovieHeading heading="MOVIES"/>
+      <SearchBox search={searchValue} setSearch={setSearchValue} />
+    </div>
+      <div className='row'>
+          <MovieList  movies={movies}/>
+      </div>
     </div>
    );
 }
