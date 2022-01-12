@@ -6,9 +6,11 @@ const SearchBox = (props) => {
             <input 
                 className="form-control" 
                 placeholder="Type to Search..."
-                value={props.value}
-                onChange= {(event) => {props.setSerach(event.target.value)}}></input>
+                value={props.search}
+                onChange= {(event) => props.setSearch(event.target.value)}></input>
+            { console.log( props.search)}        
         </div>
+
      );
 }
  

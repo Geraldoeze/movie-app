@@ -17,6 +17,7 @@ const MovieList = (props) => {
                 </div>)
             }) 
             }
+            {console.log(props.movies)}
         </>
      );
 }
