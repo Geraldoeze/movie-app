@@ -10,7 +10,7 @@ const MovieList = (props) => {
                 <div key={movie.imdbID} className=" image-container d-flex justify-content-start mvlist">
                     <img src={movie.Poster} alt='movie'></img>
                     <div
-                        onClick={props.handleFavouriteClick} 
+                        onClick={() => props.handleFavouriteClick(movie)} 
                         className="overlay d-flex align-items-center justify-contents">
                         <FavouriteComponent />
                     </div>
