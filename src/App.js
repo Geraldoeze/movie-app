@@ -12,7 +12,7 @@ import RemoveFavourite from './components/RemoveFavou';
 
 const App = () => {
   const [movies, setMovies] = useState([]);
-  const [favourite, setFavourite] = useState([ ])
+  const [favourite, setFavourite] = useState([])
   const [searchValue, setSearchValue] = useState('');
 
   const getMovieRequest = async (searchValue) => {
@@ -24,7 +24,7 @@ const App = () => {
     if(responseJson.Search) {
       setMovies(responseJson.Search);
     }
-    
+    console.log(movies)
   };
 
   useEffect(() => {
@@ -32,10 +32,10 @@ const App = () => {
     console.log('change', searchValue, movies)
   }, [searchValue]);
   
-  useEffect(() => {
-    const movieFavourites = JSON.parse(localStorage.getItem('react-movie-app-favourites'));
-    setFavourite(movieFavourites)
-  }, []);
+  // useEffect(() => {
+  //   const movieFavourites = JSON.parse(localStorage.getItem('react-movie-app-favourites'));
+  //   setFavourite(movieFavourites)
+  // }, []);
 
   const saveToLocalStorage = (items) => {
     localStorage.setItem('react-movie-app-favourites', JSON.stringify(items))
@@ -59,6 +59,8 @@ const RemoveFavouriteMovie = (movie) => {
 
   return ( 
     <div className='container-fluid movie-app'>
+
+    {console.log(localStorage)}
     <div className=' d-flex align-items-center mt-4 mb-4'>
       <MovieHeading heading="MOVIES"/>
       <SearchBox search={searchValue} setSearch={changeValue} />
